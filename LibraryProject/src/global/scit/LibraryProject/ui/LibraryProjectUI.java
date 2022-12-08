@@ -34,7 +34,7 @@ public class LibraryProjectUI {
 				update();
 				break;
 			case "5":
-				lendbook();
+				rentbook();
 				break;
 			case "6":
 				returnbook();
@@ -72,7 +72,7 @@ public class LibraryProjectUI {
 	}
 
 	//도서대출
-	private void lendbook() {
+	private void rentbook() {
 		System.out.println("\n [ 도서 대여 ]");
 		int numbers;
 		// 로그인
