@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="global.scit.LibraryProject.dao.LibraryMapper">
+
+	<insert id="registbook" parameterType="Book">
+		INSERT INTO Book (ISBN, NUMBERS, TITLE, AUTHOR, RENT, BOOKCOM, STOCK)
+		VALUES(#{isbn},book_seq.nextval,#{title},#{author},'Y',#{bookcom},#{stock})
+	</insert>
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM book
+		WHERE NUMBERS = #{numbers}
+	</delete>
+
+	<select id="selectOne" parameterType="int" resultType="Book">
+		SELECT
+		isbn, numbers, title, author, rent, bookcom, stock
+		FROM
+		book
+		WHERE
+		NUMBERs = #{numbers}
+	</select>
+
+	<select id="selectIsbn" parameterType="String" resultType="Book">
+		SELECT
+		isbn, numbers, title, author, rent, bookcom, stock
+		FROM
+		book
+		WHERE
+		ISBN = #{isbn}
+	</select>
+
+
+	<select id="Allbook" resultType="Book">
+		SELECT
+		isbn, numbers, title, author, rent, bookcom, stock
+
+		FROM
+		book
+	</select>
+
+	<update id="update" parameterType="Book">
+		update book
+		set STOCK = #{stock}
+		WHERE ISBN = #{isbn}
+	</update>
+	
+	
+	<update id="updateRentInfo" parameterType="RentAndUsers">
+		update rent
+		set
+		(
+			RENT_DATE = "22/12/08",
+			RENT_RETURN_DATE = "22/12/18"
+		)
+		WHERE 
+			USER_NUMBER = #{uSER_NUMBER} 
+			AND		
+			RENT.USER_NUMBER = USERS1.USER_NUMBER
+	</update>
+
+	<update id="updateUserInfo" parameterType="RentAndUsers">
+		update users1
+		set
+		(
+		USER_RENTED_BOOK = #{uSER_RENTED_BOOK},
+		USER_RENTED_BOOK_QUANTITY = #{uSER_RENTED_BOOK_QUANTITY}
+		)
+		WHERE RENT.USER_NUMBER = USERS1.USER_NUMBER
+	</update>
+
+</mapper>
